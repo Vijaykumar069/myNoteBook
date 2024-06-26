@@ -1,26 +1,25 @@
 const mongoose = require('mongoose');
-const Schema=mongoose.Schema;
-const UserSchema = new Schema({
-    name:{
-        type: String,
-        required: true
-    },
-    email:{
-        type: String,
-        required: true,
-        unique: true
-    }, 
-    passcode:{
-        type: String,
-        required: true
-    },
-    date:{
-        type: Date,
-        default: Date.now()
-    }
-    
-});
-const User=mongoose.model('user',UserSchema);
-// User.createIndexes();  // we are removing this inorder to avoid extra index in mongo db
+const  Schema  = mongoose.Schema;
 
-module.exports=User; 
+const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+const User = mongoose.model('user',UserSchema);
+module.exports = User;
+

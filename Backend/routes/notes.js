@@ -2,8 +2,9 @@ const express = require("express");
 const mongoose = require('mongoose');
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
-const Notes = require("../Models/Notes");
-var fetchuser = require("../Middleware/fetchuser");
+const Notes = require("../models/Notes");
+var fetchuser = require("../middleware/fetchuser");
+
 // ROUTE 1: Get all the notes....so we will use get here...
 // GET "/api/notes/fetchallnotes"
 router.get("/fetchallnotes", fetchuser, async (req, res) => {
@@ -15,6 +16,7 @@ router.get("/fetchallnotes", fetchuser, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
 // ROUTE 2: Add a new note using : POST "/api/notes/addnote". login required....
 router.post(
   "/addnote",
@@ -70,9 +72,9 @@ router.put('/updatenotes/:id', fetchuser, async (req, res) => {
   } catch (error) {
       res.status(500).send('Found internal error...');
   }
-})
-// ROUTE 4: For deleting any particular note...using DELETE "/api/deletenotes" login req...
+});
 
+// ROUTE 4: For deleting any particular note...using DELETE "/api/deletenotes" login req...
 router.delete("/deletenotes/:id", fetchuser, async (req, res) => {
   // Check if req.params.id is a valid ObjectId
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -98,5 +100,5 @@ router.delete("/deletenotes/:id", fetchuser, async (req, res) => {
   }
 });
 
-
 module.exports = router;
+
